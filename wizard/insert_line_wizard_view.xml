@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_insert_line_wizard_form" model="ir.ui.view">
+        <field name="name">sale.order.line.insert.wizard.form</field>
+        <field name="model">sale.order.line.insert.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Insert Line">
+                <group>
+                    <field name="insert_type"/>
+                    <field name="name"
+                           invisible="insert_type == 'product'"
+                           required="insert_type in ('section', 'note')"
+                           placeholder="Enter the content of your section or note"/>
+                    <field name="product_id"
+                           invisible="insert_type != 'product'"
+                           required="insert_type == 'product'"/>
+                </group>
+                <footer>
+                    <button name="action_validate"
+                            string="Insert"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_insert_line_wizard" model="ir.actions.act_window">
+        <field name="name">Insert Line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.line.insert.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
